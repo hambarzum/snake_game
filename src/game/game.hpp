@@ -1,26 +1,44 @@
-#pragma once
+#include "board.hpp"
+#include "game_object.hpp"
+#include "snake.hpp"
 
 #include <vector>
 
-#include "board.hpp"
-#include "game_object.hpp"
-#include "menu.hpp"
-#include "snake.hpp"
-
-
 using GameObjects = std::vector<GameObject>;
+
+struct Size {
+    int height;
+    int width;
+
+};
+
+enum Direction {
+    // TODO: create 4 directions
+};
 
 class Game {
 public:
-    Game(Menu mainMenu, Board& board, Snake& snake);
+    Game(Size boardSize);
 
 public:
-    bool isOver();
-    void 
+    bool gameStatus();
+    void move(Direction dir); 
 
 private:
-    Menu mainMenu_;
+    void setupBoard();
+    void displayBoard();
+    void setupBoardBoundaries();
+    void setupBoardObjects();
+    void setupPlayer();
+    void setupTopBoundary();
+    void setupBottomBoundary();
+    void setupLeftBoundary();
+    void setupRightBoundary();
+    void setupFruit();
+private:
     Board board_;
     Snake player_;
-    GameObject fruit_;
+    GameObjects fruit_;
+    // TODO: GameMode mode_;
+    bool isOver = false;
 };
