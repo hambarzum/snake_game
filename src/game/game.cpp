@@ -32,19 +32,19 @@ void Game::setupPlayer() {
 
 /// Setting up board boundaries
 
-void Game::setupTopBoundary() {
-    
+void Game::setupTopBoundary(Size boardSize) {
+    board_.addTopBoundary(boardSize); 
 } 
 
-void Game::setupBottomBoundary() {
+void Game::setupBottomBoundary(Size boardSize) {
 
 }
 
-void Game::setupLeftBoundary() {
+void Game::setupLeftBoundary(Size boardSize) {
 
 }
 
-void Game::setupRightBoundary() {
+void Game::setupRightBoundary(Size boardSize) {
 
 }
 

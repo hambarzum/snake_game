@@ -3,16 +3,24 @@
 #include <stdio.h>
 #include <vector>
 
-using Size = int;
+struct Size {
+    int height;
+    int width;
+};
 
 
 class Board {
 public:
     Board(Size boardSize);
 
-private:
-    void setupBoard();
-    
+public:
+    Size getSize();
+    // REDO
+    void addTopBoundary(Size);
+    void addBottomBoundary(Size);
+    void addLeftBoundary(Size);
+    void addRightBoundary(Size);
+
 private: 
     Size boardSize_;
 

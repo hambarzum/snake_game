@@ -1,16 +1,11 @@
 #include "board.hpp"
-#include "game_object.hpp"
+#include "game_kit.hpp"
+#include "game_objects.hpp"
 #include "snake.hpp"
 
 #include <vector>
 
 using GameObjects = std::vector<GameObject>;
-
-struct Size {
-    int height;
-    int width;
-
-};
 
 enum Direction {
     // TODO: create 4 directions
@@ -25,20 +20,24 @@ public:
     void move(Direction dir); 
 
 private:
-    void setupBoard();
+    void setupBoard(); 
+    // TODO: setup a scorebar underneath the gameboard in setupBoard()
     void displayBoard();
     void setupBoardBoundaries();
     void setupBoardObjects();
     void setupPlayer();
-    void setupTopBoundary();
-    void setupBottomBoundary();
-    void setupLeftBoundary();
-    void setupRightBoundary();
+    void setupTopBoundary(Size boardSize);
+    void setupBottomBoundary(Size boardSize);
+    void setupLeftBoundary(Size boardSize);
+    void setupRightBoundary(Size boardSize);
     void setupFruit();
 private:
+    //GameKit kit_;
     Board board_;
     Snake player_;
     GameObjects fruit_;
-    // TODO: GameMode mode_;
+    GameObjects boundaries_; // not obstacles if game mode is non-limit 
     bool isOver = false;
+    // TODO: GameMode mode_;
+    
 };
