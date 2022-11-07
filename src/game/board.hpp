@@ -1,3 +1,5 @@
+#include "cell.hpp"
+
 #include <iostream>
 #include <ncurses.h>
 #include <stdio.h>
@@ -8,13 +10,16 @@ struct Size {
     int width;
 };
 
+using Boundary = std::vector<Cell>;
+using Boundaries = std::vector<Boundary>;
 
 class Board {
 public:
     Board(Size boardSize);
 
 public:
-    Size getSize();
+    void setSize(Size);
+    Size getSize();  
     // REDO
     void addTopBoundary(Size);
     void addBottomBoundary(Size);
@@ -23,5 +28,5 @@ public:
 
 private: 
     Size boardSize_;
-
+    Boundaries bounds_;
 };
