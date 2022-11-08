@@ -2,35 +2,22 @@
 
 using Coord = int;
 
+struct Position {
+    Coord x;
+    Coord y;
+};
+
 class Cell {
 public:
-    Cell() 
-        : x_{0}, y_{0}
-    {}
- 
-    Cell(Coord x, Coord y) {
-        x_ = x;
-        y_ = y;
-    }
+    Cell();
+    Cell(Coord x, Coord y);
 
 public:
-    void setX(Coord x) {
-        x_ = x;
-    }
-
-    Coord getX() const {
-        return x_;
-    } 
-
-    void setY(Coord y) {
-        y_ = y;
-    }
-
-    Coord getY() const {
-        return y_;
-    }
+    void setX(Coord x);
+    Coord getX() const;
+    void setY(Coord y);
+    Coord getY() const;
 
 private:
-    Coord x_;
-    Coord y_;
+    Position pos_;
 };

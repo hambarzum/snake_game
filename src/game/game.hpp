@@ -23,23 +23,18 @@ private:
     void setupBoard(); 
     // TODO: setup a scorebar underneath the gameboard in setupBoard()
     void displayBoard();
-    void setupBoardBoundaries();
-    void setupTopBoundary(Size boardSize);
-    void setupBottomBoundary(Size boardSize);
-    void setupLeftBoundary(Size boardSize);
-    void setupRightBoundary(Size boardSize);
-    void setupBoardObjects();
+    // void setupBoardBoundaries();
+    void setupBoardObjects(GameObjects);
+    void setupBoardObject(GameObject);
     void setupPlayer();
     void setupFruit();
-    void drawBoundaries();
-    void drawGameObjects();
-    void drawPlayer();
+    void drawOnBoard();
 
 private:
-    //GameKit kit_;
+    GameKit gameKit_;
     Board board_;
-    Snake player_; // Player is extended Snake?
-    GameObjects fruit_;
+    GameObject player_; // Player is extended Snake?
+    GameObjects fruits_; // vector of 3 fruits
     GameObjects boundaries_; // top, bottom, left and right boundaries' vector // not obstacles if game mode is non-limit
     bool isOver;
     // TODO: GameMode mode_;

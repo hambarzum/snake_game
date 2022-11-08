@@ -11,39 +11,46 @@ Game::Game(Size boardSize)
 /// Setting up the board
 
 void Game::setupBoard() {
-    setupBoardBoundaries();
-    setupBoardObjects();
+    setupBoardObjects(boundaries_);
+    setupBoardObjects(fruits_);
     setupPlayer();
 }
 
-void Game::setupBoardBoundaries() {
+void Game::setupBoardObjects(GameObjects objects) {
     const Size boardSize = board_.getSize();
 
     boundaries_.push_back(board_.addTopBoundary(boardSize));
     boundaries_.push_back(board_.addBottomBoundary(boardSize));
     boundaries_.push_back(board_.addLeftBoundary(boardSize));
     boundaries_.push_back(board_.addRightBoundary(boardSize));
+
+    for(auto obj : objects) {
+        setupBoardObject(obj);
+    }
 }
 
+void Game::setupBoardObject(GameObject obj) {
+    obj = gameKit_.addObject();
+}
 
 /// Setting up game objects
 
-void Game::setupBoardObjects() {
-    setupFruit();
+void Game::setupBoardObjects(GameObjects objects) {
+    // TODO
 }
 
 void Game::setupPlayer() {
     player_;
 }
 
-void Game::setupFruit() {
+void Game::setupFruits() {
     // TODO
 }
 
 void Game::displayBoard() {
-    drawBoundaries();
-    drawGameObjects();
-    drawPlayer();
+    drawOnBoard(boundaries_);
+    drawOnBoard(fruits_);
+    drawOnBoard();
 }
 
 bool Game::gameStatus() const {

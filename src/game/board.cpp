@@ -4,12 +4,12 @@ Board::Board(Size boardSize)
     : boardSize_{boardSize}
 {}
 
-Size Board::getSize() const {
-    return boardSize_;
-}
-
 void Board::setSize(Size boardSize) {
     boardSize_ = boardSize;
+}
+
+Size Board::getSize() const {
+    return boardSize_;
 }
 
 void Board::addTopBoundary(Size boardSize) {
