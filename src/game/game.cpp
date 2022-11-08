@@ -1,10 +1,11 @@
 #include "game.hpp"
 
 Game::Game(Size boardSize) 
-    : board_(boardSize)
+    : board_{boardSize}, isOver{false}
 {
     setupBoard();
     displayBoard();
+    // TODO: Setup scorebar
 }
 
 /// Setting up the board
@@ -16,40 +17,35 @@ void Game::setupBoard() {
 }
 
 void Game::setupBoardBoundaries() {
-    setupTopBoundary();
-    setupBottomBoundary();
-    setupLeftBoundary();
-    setupRightBoundary();
+    const Size boardSize = board_.getSize();
+
+    boundaries_.push_back(board_.addTopBoundary(boardSize));
+    boundaries_.push_back(board_.addBottomBoundary(boardSize));
+    boundaries_.push_back(board_.addLeftBoundary(boardSize));
+    boundaries_.push_back(board_.addRightBoundary(boardSize));
 }
+
+
+/// Setting up game objects
 
 void Game::setupBoardObjects() {
     setupFruit();
 }
 
 void Game::setupPlayer() {
-
+    player_;
 }
-
-/// Setting up board boundaries
-
-void Game::setupTopBoundary(Size boardSize) {
-    board_.addTopBoundary(boardSize); 
-} 
-
-void Game::setupBottomBoundary(Size boardSize) {
-
-}
-
-void Game::setupLeftBoundary(Size boardSize) {
-
-}
-
-void Game::setupRightBoundary(Size boardSize) {
-
-}
-
-/// Setting up game objects
 
 void Game::setupFruit() {
-    fruit_.add();
+    // TODO
+}
+
+void Game::displayBoard() {
+    drawBoundaries();
+    drawGameObjects();
+    drawPlayer();
+}
+
+bool Game::gameStatus() const {
+    return isOver;
 }

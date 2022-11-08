@@ -8,19 +8,17 @@ public:
         : x_{0}, y_{0}
     {}
  
-/*  Cell(Coord x, Coord y) {
-**      x_ = x;
-**      y_ = y;
-**  }
-**  if neccessary
-*/
+    Cell(Coord x, Coord y) {
+        x_ = x;
+        y_ = y;
+    }
 
 public:
     void setX(Coord x) {
         x_ = x;
     }
 
-    Coord getX() {
+    Coord getX() const {
         return x_;
     } 
 
@@ -28,7 +26,7 @@ public:
         y_ = y;
     }
 
-    Coord getY() {
+    Coord getY() const {
         return y_;
     }
 

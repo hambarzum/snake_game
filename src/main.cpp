@@ -2,7 +2,7 @@
 #include <ncurses.h>
 #include <stdio.h>
 
-//#include "game.hpp"
+#include "game.hpp"
 
 int main() {
 	initscr();
@@ -13,6 +13,8 @@ int main() {
 	getch();
 	endwin();
 	std::cout << "Hello, World!" << std::endl;
+
+
 	return 0;
 	//Game game;
 }
