@@ -1,13 +1,13 @@
 #include "snake.hpp"
 
 Snake::Snake() 
-    : head_{1,1} // {0,0} {1,0} are boundary cells
+    : head_{std::make_unique<Cell>(1,1)} // {0,0} {1,0} are boundary cells
 {
 
 }
 
-Head Snake::getHeadPosition() const {
-    return head_;
+Position Snake::getHeadPosition() const {
+    return head_->getPosition();
 }
 
 Length Snake::getBodyLength () const {

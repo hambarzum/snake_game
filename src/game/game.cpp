@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 Game::Game(Size boardSize) 
-    : board_{boardSize}, isOver{false}
+    : board_{boardSize}, gameOver{false}
 {
     setupBoard();
     displayBoard();
@@ -11,48 +11,37 @@ Game::Game(Size boardSize)
 /// Setting up the board
 
 void Game::setupBoard() {
-    setupBoardObjects(boundaries_);
-    setupBoardObjects(fruits_);
+    setupBoardBoundaries();
+    setupFood();
     setupPlayer();
 }
 
-void Game::setupBoardObjects(GameObjects objects) {
+void Game::setupBoardBoundaries() {
     const Size boardSize = board_.getSize();
 
-    boundaries_.push_back(board_.addTopBoundary(boardSize));
-    boundaries_.push_back(board_.addBottomBoundary(boardSize));
-    boundaries_.push_back(board_.addLeftBoundary(boardSize));
-    boundaries_.push_back(board_.addRightBoundary(boardSize));
-
-    for(auto obj : objects) {
-        setupBoardObject(obj);
-    }
-}
-
-void Game::setupBoardObject(GameObject obj) {
-    obj = gameKit_.addObject();
+    boundaries_.push_back(gameKit_.createTopBoundary(boardSize));
+    boundaries_.push_back(gameKit_.createBottomBoundary(boardSize));
+    boundaries_.push_back(gameKit_.createLeftBoundary(boardSize));
+    boundaries_.push_back(gameKit_.createRightBoundary(boardSize)); 
+ 
 }
 
 /// Setting up game objects
 
-void Game::setupBoardObjects(GameObjects objects) {
-    // TODO
-}
-
 void Game::setupPlayer() {
-    player_;
+    // player_ = gameKit_.createPlayer();
 }
 
-void Game::setupFruits() {
+void Game::setupFood() {
     // TODO
 }
 
 void Game::displayBoard() {
     drawOnBoard(boundaries_);
-    drawOnBoard(fruits_);
-    drawOnBoard();
+    drawOnBoard(food_);
+    drawOnBoard(player_);
 }
 
-bool Game::gameStatus() const {
-    return isOver;
+bool Game::isOver() const {
+    return gameOver;
 }

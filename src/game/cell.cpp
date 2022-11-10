@@ -22,5 +22,9 @@ void Cell::setY(Coord y) {
 }
 
 Coord Cell::getY() const {
-    return pos_.y;
+        return pos_.y;
+}
+
+Position Cell::getPosition() const {
+        return Position{getX(), getY()};
 }

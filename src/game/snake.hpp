@@ -1,9 +1,10 @@
 #include "cell.hpp"
 
+#include <memory> // std::unique_ptr
 #include <vector>
 
-using Head = Cell;
-using Body = std::vector<Cell>; 
+using Head = std::unique_ptr<Cell>;
+using Body = std::vector<std::unique_ptr<Cell>>; 
 using Length = int;
 
 class Snake {
@@ -11,7 +12,7 @@ public:
     Snake();
 
 public:
-    Head getHeadPosition() const;
+    Position getHeadPosition() const;
     Length getBodyLength() const;
 
 private:

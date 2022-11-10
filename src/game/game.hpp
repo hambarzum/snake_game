@@ -5,38 +5,37 @@
 
 #include <vector>
 
-
 enum Direction {
     // TODO: create 4 directions
 };
 
+using GameObjects = std::vector<GameObject>;
 
 class Game {
 public:
     Game(Size boardSize);
 
 public:
-    bool gameStatus() const;
+    bool isOver() const;
     void move(Direction dir); 
 
 private:
     void setupBoard(); 
     // TODO: setup a scorebar underneath the gameboard in setupBoard()
     void displayBoard();
-    // void setupBoardBoundaries();
-    void setupBoardObjects(GameObjects);
-    void setupBoardObject(GameObject);
+    void setupBoardBoundaries();
+    void setupFood();
     void setupPlayer();
-    void setupFruit();
-    void drawOnBoard();
+    void drawOnBoard(const GameObjects&);
+    void drawOnBoard(const GameObject&);
 
 private:
-    GameKit gameKit_;
+    GameKit gameKit_; // Object creation mechanism
     Board board_;
     GameObject player_; // Player is extended Snake?
-    GameObjects fruits_; // vector of 3 fruits
-    GameObjects boundaries_; // top, bottom, left and right boundaries' vector // not obstacles if game mode is non-limit
-    bool isOver;
+    Food food_; // vector of 3 fruits
+    Boundaries boundaries_; //  vector of top, bottom, left and right boundaries
+    bool gameOver;
     // TODO: GameMode mode_;
     
 };

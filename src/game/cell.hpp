@@ -17,7 +17,7 @@ public:
     Coord getX() const;
     void setY(Coord y);
     Coord getY() const;
-
+    Position getPosition() const;
 private:
     Position pos_;
 };

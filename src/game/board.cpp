@@ -12,6 +12,7 @@ Size Board::getSize() const {
     return boardSize_;
 }
 
+/*
 void Board::addTopBoundary(Size boardSize) {
     boundaries_.push_back(createTopBoundary(boardSize));
 }
@@ -67,3 +68,4 @@ Boundary Board::createRightBoundary(Size boardSize) {
 
     return rightBound;
 }
+*/
