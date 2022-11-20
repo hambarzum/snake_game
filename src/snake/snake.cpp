@@ -10,6 +10,6 @@ Position Snake::getHeadPosition() const {
     return head_->getPosition();
 }
 
-Length Snake::getBodyLength () const {
-    return body_.size();
+int Snake::getTailLength () const {
+    return tail_.size();
 }

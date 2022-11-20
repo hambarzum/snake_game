@@ -1,5 +1,8 @@
-#include "board.hpp"
-#include "game_objects.hpp"
+#ifndef GAME_KIT_HPP
+#define GAME_KIT_HPP
+
+#include "../board/board.hpp"
+#include "game_objects/game_object.hpp"
 
 class GameKit {
 public:
@@ -15,3 +18,5 @@ public:
 private:
     // GameObjects objects;
 };
+
+#endif // GAME_KIT_HPP

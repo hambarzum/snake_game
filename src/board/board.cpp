@@ -12,6 +12,30 @@ Size Board::getSize() const {
     return boardSize_;
 }
 
+void Board::display() {
+    init();
+    print();
+}
+
+void Board::init() {
+    initscr();
+    curs_set(0);
+    noecho();
+}
+
+void Board::print() {
+    int xMax, yMax;
+    getmaxyx(stdscr, yMax, xMax);
+
+    window_ = newwin(boardSize_.height, boardSize_.width, (yMax - boardSize_.height) / 2, (xMax - boardSize_.width ) / 2 );
+    box(window_, 0, 0);
+    wrefresh(window_);
+}
+
+Board::~Board() {
+    endwin();
+}
+
 /*
 void Board::addTopBoundary(Size boardSize) {
     boundaries_.push_back(createTopBoundary(boardSize));

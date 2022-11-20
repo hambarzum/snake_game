@@ -1,5 +1,8 @@
+#ifndef BOARD_HPP
+#define BOARD_HPP
+
+#include "game/game_objects/boundary.hpp"
 #include "cell.hpp"
-#include "game_objects.hpp"
 
 #include <iostream>
 #include <ncurses.h>
@@ -11,16 +14,17 @@ struct Size {
     int width;
 };
 
-
 using Boundaries = std::vector<Boundary>;
+using Matrix = std::vector<std::vector<Cell>>;
 
 class Board {
 public:
     Board(Size boardSize);
-
+    ~Board();
 public:
     void setSize(Size);
     Size getSize() const;
+    void display();
 /*
     void addTopBoundary(Size);
     void addBottomBoundary(Size);
@@ -32,7 +36,15 @@ public:
     Boundary createRightBoundary(Size boardSize); 
 */
 
+private:
+    void init();
+    void print();
+
 private: 
+    WINDOW* window_;
     Size boardSize_;
-    Boundaries boundaries_{4}; // vector of top, bottom, left and right boundaries
+    Matrix boardMatrix;
+    Boundaries boundaries_; // vector of top, bottom, left and right boundaries
 };
+
+#endif // BOARD_HPP

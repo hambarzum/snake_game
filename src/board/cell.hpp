@@ -1,4 +1,5 @@
-/// IF ANY ADDITIONS, MOVE IMPLEMENTATION TO SEPERATE .cpp FILE
+#ifndef CELL_HPP
+#define CELL_HPP
 
 using Coord = int;
 
@@ -21,3 +22,5 @@ public:
 private:
     Position pos_;
 };
+
+#endif // CELL_HPP

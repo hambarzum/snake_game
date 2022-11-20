@@ -1,11 +1,12 @@
-#include "cell.hpp"
+#ifndef SNAKE_HPP
+#define SNAKE_HPP
+
+#include "../board/cell.hpp"
 
 #include <memory> // std::unique_ptr
 #include <vector>
 
 using Head = std::unique_ptr<Cell>;
-using Body = std::vector<std::unique_ptr<Cell>>; 
-using Length = int;
 
 class Snake {
 public:
@@ -13,9 +14,11 @@ public:
 
 public:
     Position getHeadPosition() const;
-    Length getBodyLength() const;
+    int getTailLength() const;
 
 private:
     Head head_;
-    Body body_;
+    Tail tail_;
 };
+
+#endif // SNAKE_HPP

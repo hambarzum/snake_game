@@ -1,5 +1,6 @@
 #include "game_kit.hpp"
-#include "snake.hpp"
+#include "../snake/snake.hpp"
+
 Snake GameKit::createTopBoundary(Size boardSize) {
     Boundary topBound{boardSize.width};
 
@@ -16,7 +17,7 @@ GameObject GameKit::createBottomBoundary(Size boardSize) {
     for(auto j = 0; j < boardSize.width; ++j) {
         bottomBound.push_back(Cell{boardSize.height-1,j});
     }
-
+    
     return bottomBound;
 }
 
