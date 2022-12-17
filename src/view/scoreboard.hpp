@@ -1,7 +1,7 @@
 #ifndef SCOREBOARD_HPP
 #define SCOREBOARD_HPP
 
-#include "../game_objects/drawable.hpp"
+#include "../game_objects/cell.hpp"
 #include "board.hpp"
 
 using Score = long long unsigned int;

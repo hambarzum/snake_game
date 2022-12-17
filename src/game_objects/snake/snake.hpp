@@ -3,7 +3,7 @@
 
 #include <queue>
 
-#include "../drawable.hpp"
+#include "../cell.hpp"
 
 enum Direction {
     up = -1,
@@ -12,7 +12,7 @@ enum Direction {
     right = 2
 }; // values assigned for legal direction movement check (i.e. can't move left when current direction is right)
 
-class SnakePiece : public Drawable {
+class SnakePiece : public Cell {
 public:
     SnakePiece(Position);
     

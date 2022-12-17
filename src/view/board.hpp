@@ -4,14 +4,14 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../game_objects/drawable.hpp"
+#include "../game_objects/cell.hpp"
 
 struct Size {
     int height;
     int width;
 };
 
-using DrawablePtr = Drawable*;
+using CellPtr = Cell*;
 
 class Board {
 public:
@@ -23,7 +23,7 @@ public:
     Size getSize() const;
     Character getInput() const;
     void refresh();
-    void drawOnBoard(Drawable);
+    void drawOnBoard(Cell);
     Position getEmptyPosition();
     bool isEmpty(Position);
     Position getPosition() const;

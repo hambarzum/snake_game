@@ -1,8 +1,8 @@
 #include <iostream>
 #include <ncurses.h>
 
-#include "src/controller/game.hpp"
-#include "src/game_objects/drawable.hpp"
+#include "src/controller/game.hpp" // for Game
+#include "src/game_objects/cell.hpp" // for Size
 
 constexpr int BOARD_HEIGHT = 20;
 constexpr int BOARD_WIDTH = 30;

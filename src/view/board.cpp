@@ -72,7 +72,7 @@ Character Board::getInput() const {
     return wgetch(boardWindow_);
 }
 
-void Board::drawOnBoard(Drawable object) {
+void Board::drawOnBoard(Cell object) {
     mvwaddch(boardWindow_, object.getPosition().column, object.getPosition().row, object.getIcon());
 }
 

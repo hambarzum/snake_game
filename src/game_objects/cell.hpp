@@ -1,5 +1,5 @@
-#ifndef DRAWABLE_HPP
-#define DRAWABLE_HPP
+#ifndef CELL_HPP
+#define CELL_HPP
 
 #include <ncurses.h>
 
@@ -10,10 +10,10 @@ struct Position {
 
 using Character = chtype;
 
-class Drawable {
+class Cell {
 public:
-    Drawable();
-    Drawable(Position pos, Character character);
+    Cell();
+    Cell(Position pos, Character character);
 
 public:
     Position getPosition() const;
@@ -24,4 +24,4 @@ protected:
     Character icon_;
 };
 
-#endif // DRAWABLE_HPP
+#endif // CELL_HPP

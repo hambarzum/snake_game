@@ -1,10 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "../view/board.hpp"
 #include "../game_objects/food.hpp"
 #include "../game_objects/snake/snake.hpp"
+#include "../view/board.hpp"
 #include "../view/scoreboard.hpp"
+
 
 using FoodPtr = Food*;
 
