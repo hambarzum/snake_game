@@ -26,7 +26,7 @@ public:
     void drawOnBoard(Cell);
     Position getEmptyPosition();
     bool isEmpty(Position);
-    Position getPosition() const;
+    Position getBoardPosition() const;
 
 private:
     void createBoardWindow(Size);

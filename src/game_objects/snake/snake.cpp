@@ -3,7 +3,7 @@
 SnakePiece::SnakePiece(Position pos) {
     pos_ = pos;
     icon_ = '*';
-} // give the snake piece a nice icon if possible
+} // give the SnakePiece a nice icon if possible
 
 Snake::Snake() {
     dir_ = down;
@@ -36,6 +36,12 @@ void Snake::setDirection(Direction dir) {
 }
 
 SnakePiece Snake::createNewPiece() {
+    SnakePiece newPiece(locateNewPiecePosition());
+
+    return newPiece;
+}
+
+Position Snake::locateNewPiecePosition() {
     Position pos = head().getPosition();
 
     switch(dir_) {
@@ -53,8 +59,8 @@ SnakePiece Snake::createNewPiece() {
             break;    
     }
 
-    return SnakePiece(pos);
-} // rename to a more relevant one
+    return pos;
+}
 
 bool Snake::legalDirection(Direction dir) {
     return (dir_ + dir);

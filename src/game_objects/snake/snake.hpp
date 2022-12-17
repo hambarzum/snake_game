@@ -20,13 +20,13 @@ private:
 
 };
 
-using SnakeBody = std::queue<SnakePiece>;
+using SnakePieces = std::queue<SnakePiece>;
 
 class Snake {
 public:
     Snake();
 
-public: // maybe private??
+public:
     void addPiece(SnakePiece);
     void removePiece();
     SnakePiece head();
@@ -36,10 +36,11 @@ public: // maybe private??
     SnakePiece createNewPiece();
 
 private:
+    Position locateNewPiecePosition();
     bool legalDirection(Direction);
 
 private:
-    SnakeBody snake_;
+    SnakePieces snake_;
     Direction dir_;
 };
 

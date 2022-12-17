@@ -12,13 +12,13 @@ public:
     ScoreBoard(Size, Position);
 
 public:
-    void clear();
     void refresh();
     void initialize(Score initScore);
     void displayUpdatedScore(Score score);
 
 private:
-    void printScoreBoard();
+    void clear();
+    void displayScoreBoard();
 
 private:
     WINDOW* scoreboardWindow_;

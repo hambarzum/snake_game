@@ -4,7 +4,7 @@
 
 Game::Game(Size boardSize) 
     : board_(boardSize), 
-    // food_(nullptr),
+    food_(nullptr),
     score_(0),
     gameOver_(false) 
 {
@@ -22,8 +22,7 @@ Game::~Game() {
 
 void Game::constructScoreBoard() {
     Size sbSize = Size{1, board_.getSize().width};
-    Position sbPos = Position{board_.getPosition().row + board_.getSize().height, board_.getPosition().column}; // places scoreboard underneath the board
-
+    Position sbPos = Position{board_.getBoardPosition().row + board_.getSize().height, board_.getBoardPosition().column}; // places scoreboard underneath the board
     scoreBoard_ = ScoreBoard(sbSize, sbPos);
 
     scoreBoard_.initialize(score_);
@@ -32,19 +31,18 @@ void Game::constructScoreBoard() {
 void Game::setupInitSnake() {  
     SnakePiece initPiece(Position{2,2});
     addPieceToHead(initPiece); // initializes snake of 1 piece in {2, 2} position
-
 }
 
 void Game::addPieceToHead(SnakePiece newHead) {
     if(!isOver()) {
         snake_.addPiece(newHead);
-        board_.drawOnBoard(newHead);
+        board_.drawOnBoard(newHead); // maybe draw whole snake on board seperately?? window/draw abstraction
     }
 }
 
 void Game::addFoodOnBoard() {
     food_ = new Food(board_.getEmptyPosition());
-    board_.drawOnBoard(*food_); // make addOnBoard get the pointer not the value
+    board_.drawOnBoard(*food_); // maybe draw on board seperately?? window/draw abstraction
 }
 
 void Game::run() {
@@ -79,7 +77,7 @@ void Game::proccessInput() {
             break;
         // TODO: 'p' for pause??
     } // TODO: handle as events seperately
-} // ! FIX: bug, any keypress fastens the movement
+} // ! BUG: any keypress fastens the movement
 
 void Game::updateState() {
     handleSnakeMovement();
@@ -95,7 +93,7 @@ void Game::handleSnakeMovement() {
     if(!foodExists()) {
         addFoodOnBoard(); 
     }
-} // BUG! segmentation fault
+}
 
 void Game::handlePossibleOutcomes(SnakePiece newHead) {
     if(isOnEmptyPosition(newHead)) {
@@ -108,16 +106,16 @@ void Game::handlePossibleOutcomes(SnakePiece newHead) {
 
     else if(isOnCollision(newHead)) {
         gameOver_ = true;
-        // this->~Game();
     }
 } // lift if possible??
 
-bool Game::isOnFood(SnakePiece head) {
-    return head.getPosition().column == food_->getPosition().column && head.getPosition().row == food_->getPosition().row; // checks if both are same Position
-}
 
 bool Game::isOnEmptyPosition(SnakePiece newHead) {
     return board_.isEmpty(newHead.getPosition());
+}
+
+bool Game::isOnFood(SnakePiece head) {
+    return head.getPosition().column == food_->getPosition().column && head.getPosition().row == food_->getPosition().row; // checks if both are same Position
 }
 
 bool Game::isOnCollision(SnakePiece newHead) {

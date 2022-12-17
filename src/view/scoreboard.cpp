@@ -1,7 +1,7 @@
 #include "scoreboard.hpp"
 
 ScoreBoard::ScoreBoard() {
-    // implement if necessary
+
 }
 
 ScoreBoard::ScoreBoard(Size size, Position pos) 
@@ -21,7 +21,7 @@ void ScoreBoard::refresh() {
 
 void ScoreBoard::initialize(Score initScore) {
     clear();
-    printScoreBoard();
+    displayScoreBoard();
     displayUpdatedScore(initScore);
     refresh();
 }
@@ -30,6 +30,6 @@ void ScoreBoard::displayUpdatedScore(Score score) {
     mvwprintw(scoreboardWindow_, 0, scoreboardWindow_->_maxx - 10, "%11llu", score);
 }
 
-void ScoreBoard::printScoreBoard() {
+void ScoreBoard::displayScoreBoard() {
     mvwprintw(scoreboardWindow_, 0, 0, "Score:");
 }

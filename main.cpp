@@ -20,6 +20,6 @@ int main() {
 
     endwin();
 
-    std::cout << '\a';
+    std::cout << '\a'; // just for fun, remove later
     return 0;
 }

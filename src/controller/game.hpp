@@ -15,13 +15,11 @@ public:
     ~Game();
 
 public:
-    bool isOver();
-
-public: // private later??
     void run();
-    void proccessInput();
-    void updateState();
-    void redraw();
+    void proccessInput(); // maybe private??  
+    void updateState(); // maybe private??  
+    void redraw(); // maybe private??  
+    bool isOver();
     int getScore() const;
 
 private:

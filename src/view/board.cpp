@@ -6,7 +6,8 @@ Board::Board() {
 
 Board::Board(Size boardSize) {
     boardSize_ = boardSize;
-
+    boardPos_ = getCenterPosition(calculateMaxSize(), boardSize);
+    
     createBoardWindow(boardSize);
     initializeBoard();
     refresh();
@@ -18,8 +19,8 @@ Board::~Board() {
 } // add an endscreen saying "game over, press key to restart" if possible
 
 void Board::createBoardWindow(Size boardSize) {
-    setupWindow();
-    boardPos_ = getCenterPosition(calculateMaxSize(), boardSize); // BUG: doesn't work if moved to Board ctor
+    setupWindow(); // maybe unnecessary?? depends on initscr()
+
     boardWindow_ = newwin(boardSize.height, boardSize.width, boardPos_.row, boardPos_.column); 
     refresh();
     
@@ -98,6 +99,6 @@ Character Board::getCharacterAt(Position pos) const {
     return mvwinch(boardWindow_, pos.column, pos.row);
 }
 
-Position Board::getPosition() const {
+Position Board::getBoardPosition() const {
     return boardPos_;
 }
