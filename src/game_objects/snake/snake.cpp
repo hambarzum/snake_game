@@ -51,10 +51,10 @@ SnakePiece Snake::createNewPiece() {
         case right:
             pos.row++;
             break;    
-    } // correct row column id possible
+    }
 
     return SnakePiece(pos);
-}
+} // rename to a more relevant one
 
 bool Snake::legalDirection(Direction dir) {
     return (dir_ + dir);

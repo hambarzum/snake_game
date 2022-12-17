@@ -31,5 +31,5 @@ void ScoreBoard::displayUpdatedScore(Score score) {
 }
 
 void ScoreBoard::printScoreBoard() {
-    mvwprintw(scoreboardWindow_, 0, 0, "Score");
+    mvwprintw(scoreboardWindow_, 0, 0, "Score:");
 }

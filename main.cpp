@@ -19,5 +19,7 @@ int main() {
     game.run();
 
     endwin();
+
+    std::cout << '\a';
     return 0;
 }
