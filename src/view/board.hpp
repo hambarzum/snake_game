@@ -24,7 +24,7 @@ public:
     Character getInput() const;
     void refresh();
     void drawOnBoard(Cell);
-    Position findEmptyPosition() ;
+    Position findEmptyPosition();
     bool isEmpty(Position) const;
     Position getBoardPosition() const;
 
