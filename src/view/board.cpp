@@ -77,7 +77,7 @@ void Board::drawOnBoard(Cell object) {
     mvwaddch(boardWindow_, object.getPosition().column, object.getPosition().row, object.getIcon());
 }
 
-Position Board::getEmptyPosition() {
+Position Board::findEmptyPosition() {
     Position pos = generateRandomPosition();
 
     while(!isEmpty(pos)) {
@@ -91,7 +91,7 @@ Position Board::generateRandomPosition() {
     return Position{rand() % (getSize().width - 1), rand() % (getSize().height - 1)}; // assures position is inside board
 }
 
-bool Board::isEmpty(Position pos) {
+bool Board::isEmpty(Position pos) const{
     return getCharacterAt(pos) == ' ';
 }
 

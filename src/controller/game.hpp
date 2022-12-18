@@ -29,10 +29,10 @@ private:
     void eatFood();
     void removeFood();
     void increaseScore();
-    bool foodExists();
-    bool isOnFood(SnakePiece);
-    bool isOnCollision(SnakePiece);
-    bool isOnEmptyPosition(SnakePiece);
+    bool foodExists() const;
+    bool isOnFood(SnakePiece) const;
+    bool isOnCollision(SnakePiece) const;
+    bool isOnEmptyPosition(SnakePiece) const;
     void removeTail();
     void addPieceToHead(SnakePiece);
     void handleSnakeMovement();

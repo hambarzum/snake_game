@@ -41,7 +41,7 @@ void Game::addPieceToHead(SnakePiece newHead) {
 }
 
 void Game::addFoodOnBoard() {
-    food_ = new Food(board_.getEmptyPosition());
+    food_ = new Food(board_.findEmptyPosition());
     board_.drawOnBoard(*food_); // maybe draw on board seperately?? window/draw abstraction
 }
 
@@ -110,15 +110,15 @@ void Game::handlePossibleOutcomes(SnakePiece newHead) {
 } // lift if possible??
 
 
-bool Game::isOnEmptyPosition(SnakePiece newHead) {
+bool Game::isOnEmptyPosition(SnakePiece newHead) const {
     return board_.isEmpty(newHead.getPosition());
 }
 
-bool Game::isOnFood(SnakePiece head) {
+bool Game::isOnFood(SnakePiece head) const {
     return head.getPosition().column == food_->getPosition().column && head.getPosition().row == food_->getPosition().row; // checks if both are same Position
 }
 
-bool Game::isOnCollision(SnakePiece newHead) {
+bool Game::isOnCollision(SnakePiece newHead) const {
     return (!isOnEmptyPosition(newHead) && !isOnFood(newHead));
 }
 
@@ -143,7 +143,7 @@ void Game::removeTail() {
     snake_.removePiece();
 }
 
-bool Game::foodExists() {
+bool Game::foodExists() const {
     return food_ != nullptr;
 }
 
