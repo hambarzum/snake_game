@@ -54,6 +54,7 @@ private:
     Snake snake_;
     FoodPtr food_;
     int score_;
+    // int speed_;
 };
 
 #endif // GAME_HPP

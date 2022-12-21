@@ -1,27 +1,23 @@
 #ifndef CELL_HPP
 #define CELL_HPP
 
-#include <ncurses.h>
-
 struct Position {
     int row;
     int column;
 };
 
-using Character = chtype;
-
 class Cell {
 public:
     Cell();
-    Cell(Position pos, Character character);
+    Cell(Position pos, char character);
 
 public:
     Position getPosition() const;
-    Character getIcon() const;
+    char getIcon() const;
 
 protected:
     Position pos_;
-    Character icon_;
+    char icon_; // alias??
 };
 
 #endif // CELL_HPP

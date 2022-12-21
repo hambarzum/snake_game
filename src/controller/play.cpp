@@ -1,31 +1,23 @@
+#include <time.h>
+#include <stdlib.h>
+
 #include "../game_objects/empty.hpp"
-#include "game.hpp"
+#include "play.hpp"
 
-
-Game::Game(Size boardSize) 
-    : board_(boardSize), 
+Game::Game(const WindowPtr win) 
+    : window_(win),
     food_(nullptr),
     score_(0),
     gameOver_(false) 
 {
     srand(time(NULL)); // randomizer
-    
-    constructScoreBoard();
     setupInitSnake(); // initializes snake of 1 piece
-    addFoodOnBoard(); 
+    addFoodOnBoard();
 }
 
 Game::~Game() {
     gameOver_ = true; // in case exits without game ending (i.e. ctrl+c)
     removeFood();
-}
-
-void Game::constructScoreBoard() {
-    Size sbSize = Size{1, board_.getSize().width};
-    Position sbPos = Position{board_.getBoardPosition().row + board_.getSize().height, board_.getBoardPosition().column}; // places scoreboard underneath the board
-    scoreBoard_ = ScoreBoard(sbSize, sbPos);
-
-    scoreBoard_.initialize(score_);
 }
 
 void Game::setupInitSnake() {  
@@ -36,13 +28,31 @@ void Game::setupInitSnake() {
 void Game::addPieceToHead(SnakePiece newHead) {
     if(!isOver()) {
         snake_.addPiece(newHead);
-        board_.drawOnBoard(newHead); // maybe draw whole snake on board seperately?? window/draw abstraction
+        window_->drawCell(newHead);
     }
 }
 
 void Game::addFoodOnBoard() {
-    food_ = new Food(board_.findEmptyPosition());
-    board_.drawOnBoard(*food_); // maybe draw on board seperately?? window/draw abstraction
+    food_ = new Food(findEmptyPosition());
+    window_->drawCell(*food_);
+}
+
+Position Game::findEmptyPosition() {
+    Position pos = generateRandomPosition();
+
+    while(!isEmpty(pos)) {
+        pos = generateRandomPosition();
+    }
+
+    return pos;
+}
+
+Position Game::generateRandomPosition() {
+    return Position{rand() % (window_->getSize().width - 1), rand() % (window_->getSize().height - 2)}; // assures position is inside board
+}
+
+bool Game::isEmpty(Position pos) const {
+    return window_->getCharacterAt(pos) == ' ';
 }
 
 void Game::run() {
@@ -58,7 +68,7 @@ bool Game::isOver() {
 }
 
 void Game::proccessInput() {
-    Character input = board_.getInput();
+    char input = window_->getInput();
 
     switch(input) {
         case 'w':
@@ -72,6 +82,9 @@ void Game::proccessInput() {
             break;
         case 'd':
             snake_.setDirection(right);
+            break;
+        case 27: // Esc ASCII code
+            gameOver_ = true;
             break;
         default:
             break;
@@ -107,11 +120,10 @@ void Game::handlePossibleOutcomes(SnakePiece newHead) {
     else if(isOnCollision(newHead)) {
         gameOver_ = true;
     }
-} // lift if possible??
-
+}
 
 bool Game::isOnEmptyPosition(SnakePiece newHead) const {
-    return board_.isEmpty(newHead.getPosition());
+    return isEmpty(newHead.getPosition());
 }
 
 bool Game::isOnFood(SnakePiece head) const {
@@ -128,18 +140,18 @@ void Game::eatFood() {
 }
 
 void Game::removeFood() {
-    board_.drawOnBoard(Empty(food_->getPosition()));
+    window_->drawCell(Empty(food_->getPosition()));
     delete food_;
     food_ = nullptr;
 }
 
 void Game::increaseScore() {
     score_ += 100;
-    scoreBoard_.displayUpdatedScore(score_);
+    window_->drawScoreBoard(score_);
 }
 
 void Game::removeTail() {
-    board_.drawOnBoard(Empty(snake_.tail().getPosition()));
+    window_->drawCell(Empty(snake_.tail().getPosition()));
     snake_.removePiece();
 }
 
@@ -148,8 +160,7 @@ bool Game::foodExists() const {
 }
 
 void Game::redraw() {
-    board_.refresh();
-    scoreBoard_.refresh();
+    window_->refresh();
 }
 
 int Game::getScore() const {

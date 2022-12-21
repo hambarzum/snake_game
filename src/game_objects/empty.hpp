@@ -6,6 +6,7 @@
 class Empty : public Cell{
 public:
     Empty(Position pos);
+    
 };
 
 #endif // EMPTY_HPP

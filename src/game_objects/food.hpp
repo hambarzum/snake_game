@@ -7,8 +7,6 @@ class Food : public Cell {
 public:
     Food(Position pos);
     
-private:
-
 };
 
 #endif // FOOD_HPP

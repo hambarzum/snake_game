@@ -3,7 +3,7 @@
 SnakePiece::SnakePiece(Position pos) {
     pos_ = pos;
     icon_ = '*';
-} // give the SnakePiece a nice icon if possible
+}
 
 Snake::Snake() {
     dir_ = down;
@@ -37,7 +37,6 @@ void Snake::setDirection(Direction dir) {
 
 SnakePiece Snake::createNewPiece() {
     SnakePiece newPiece(locateNewPiecePosition());
-
     return newPiece;
 }
 

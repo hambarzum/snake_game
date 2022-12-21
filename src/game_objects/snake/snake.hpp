@@ -10,13 +10,11 @@ enum Direction {
     down = 1,
     left = -2,
     right = 2
-}; // values assigned for legal direction movement check (i.e. can't move left when current direction is right)
+}; // values assigned for legal direction movement checks (i.e. can't move left when current direction is right)
 
 class SnakePiece : public Cell {
 public:
     SnakePiece(Position);
-    
-private:
 
 };
 
