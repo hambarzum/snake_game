@@ -1,6 +1,6 @@
 #include "snake.hpp"
 
-SnakePiece::SnakePiece(Position pos) {
+SnakePiece::SnakePiece(const Position& pos) {
     pos_ = pos;
     icon_ = '*';
 }
@@ -9,7 +9,7 @@ Snake::Snake() {
     dir_ = down;
 }
 
-void Snake::addPiece(SnakePiece piece) {
+void Snake::addPiece(const SnakePiece& piece) {
     snake_.push(piece);
 }
 
@@ -17,11 +17,11 @@ void Snake::removePiece() {
     snake_.pop();
 }
 
-SnakePiece Snake::head() {
+SnakePiece Snake::head() const {
     return snake_.back();
 }
 
-SnakePiece Snake::tail() {
+SnakePiece Snake::tail() const {
     return snake_.front(); 
 }
 
@@ -29,18 +29,18 @@ Direction Snake::getDirection() const {
     return dir_;
 }
 
-void Snake::setDirection(Direction dir) {
+void Snake::setDirection(const Direction& dir) {
     if(legalDirection(dir)){
         dir_ = dir;
     }
 }
 
-SnakePiece Snake::createNewPiece() {
-    SnakePiece newPiece(locateNewPiecePosition());
+SnakePiece Snake::createNewPiece() const {
+    const SnakePiece newPiece(locateNewPiecePosition());
     return newPiece;
 }
 
-Position Snake::locateNewPiecePosition() {
+Position Snake::locateNewPiecePosition() const {
     Position pos = head().getPosition();
 
     switch(dir_) {
@@ -61,6 +61,6 @@ Position Snake::locateNewPiecePosition() {
     return pos;
 }
 
-bool Snake::legalDirection(Direction dir) {
+bool Snake::legalDirection(const Direction& dir) const {
     return (dir_ + dir);
 }

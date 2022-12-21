@@ -16,16 +16,16 @@ Game::Game(const WindowPtr win)
 }
 
 Game::~Game() {
-    gameOver_ = true; // in case exits without game ending (i.e. ctrl+c)
+    gameOver_ = true; // in case exits without game ending (i.e. Esc)
     removeFood();
 }
 
 void Game::setupInitSnake() {  
-    SnakePiece initPiece(Position{2,2});
+    const SnakePiece initPiece(Position{2,2});
     addPieceToHead(initPiece); // initializes snake of 1 piece in {2, 2} position
 }
 
-void Game::addPieceToHead(SnakePiece newHead) {
+void Game::addPieceToHead(const SnakePiece& newHead) {
     if(!isOver()) {
         snake_.addPiece(newHead);
         window_->drawCell(newHead);
@@ -37,7 +37,7 @@ void Game::addFoodOnBoard() {
     window_->drawCell(*food_);
 }
 
-Position Game::findEmptyPosition() {
+Position Game::findEmptyPosition() const {
     Position pos = generateRandomPosition();
 
     while(!isEmpty(pos)) {
@@ -47,11 +47,11 @@ Position Game::findEmptyPosition() {
     return pos;
 }
 
-Position Game::generateRandomPosition() {
+Position Game::generateRandomPosition() const {
     return Position{rand() % (window_->getSize().width - 1), rand() % (window_->getSize().height - 2)}; // assures position is inside board
 }
 
-bool Game::isEmpty(Position pos) const {
+bool Game::isEmpty(const Position& pos) const {
     return window_->getCharacterAt(pos) == ' ';
 }
 
@@ -63,12 +63,12 @@ void Game::run() {
     }
 }
 
-bool Game::isOver() {
+bool Game::isOver() const {
     return gameOver_;
 }
 
 void Game::proccessInput() {
-    char input = window_->getInput();
+    const char input = window_->getInput();
 
     switch(input) {
         case 'w':
@@ -88,16 +88,16 @@ void Game::proccessInput() {
             break;
         default:
             break;
-        // TODO: 'p' for pause??
-    } // TODO: handle as events seperately
-} // ! BUG: any keypress fastens the movement
+        // TODO: 'p' or 'space' for pause
+    }
+}
 
 void Game::updateState() {
     handleSnakeMovement();
-} // check if reached winning score, end win window
+}
 
 void Game::handleSnakeMovement() {
-    SnakePiece newHead = snake_.createNewPiece();
+    const SnakePiece newHead = snake_.createNewPiece();
 
     handlePossibleOutcomes(newHead);
 
@@ -108,7 +108,7 @@ void Game::handleSnakeMovement() {
     }
 }
 
-void Game::handlePossibleOutcomes(SnakePiece newHead) {
+void Game::handlePossibleOutcomes(const SnakePiece& newHead) {
     if(isOnEmptyPosition(newHead)) {
         removeTail();
     }
@@ -122,15 +122,15 @@ void Game::handlePossibleOutcomes(SnakePiece newHead) {
     }
 }
 
-bool Game::isOnEmptyPosition(SnakePiece newHead) const {
+bool Game::isOnEmptyPosition(const SnakePiece& newHead) const {
     return isEmpty(newHead.getPosition());
 }
 
-bool Game::isOnFood(SnakePiece head) const {
+bool Game::isOnFood(const SnakePiece& head) const {
     return head.getPosition().column == food_->getPosition().column && head.getPosition().row == food_->getPosition().row; // checks if both are same Position
 }
 
-bool Game::isOnCollision(SnakePiece newHead) const {
+bool Game::isOnCollision(const SnakePiece& newHead) const {
     return (!isOnEmptyPosition(newHead) && !isOnFood(newHead));
 }
 
@@ -159,7 +159,7 @@ bool Game::foodExists() const {
     return food_ != nullptr;
 }
 
-void Game::redraw() {
+void Game::redraw() const{
     window_->refresh();
 }
 

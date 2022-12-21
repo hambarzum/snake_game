@@ -3,14 +3,18 @@
 
 #include "menu.hpp"
 
-class Options : public Menu {
+
+class Options {
 public:
     Options(const WindowPtr);
-    ~Options();
-
+    
 public:
-    void handleInput();
+    void processInput();
     void run();
+
+private:
+    WindowPtr window_;
+    bool exit_;
 };
 
 #endif //  OPTIONS_HPP

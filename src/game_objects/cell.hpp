@@ -9,7 +9,7 @@ struct Position {
 class Cell {
 public:
     Cell();
-    Cell(Position pos, char character);
+    Cell(const Position& pos, char character);
 
 public:
     Position getPosition() const;

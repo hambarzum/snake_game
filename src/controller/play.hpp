@@ -14,39 +14,37 @@ public:
 
 public:
     void run();
-    bool isOver();
+    bool isOver() const;
     int getScore() const;
 
 private:
     void proccessInput();
     void updateState();
-    void redraw(); 
+    void redraw() const;
 
 private:
     void setupInitSnake();
-    void addPieceToHead(SnakePiece);
+    void addPieceToHead(const SnakePiece&);
     void addFoodOnBoard();
-
-private:
-    Position findEmptyPosition();
-    Position generateRandomPosition();
-    bool isEmpty(Position) const;
+    Position findEmptyPosition() const;
+    Position generateRandomPosition() const;
+    bool isEmpty(const Position&) const;
 
 private:
     void handleSnakeMovement();
-    void handlePossibleOutcomes(SnakePiece newHead);
+    void handlePossibleOutcomes(const SnakePiece& newHead);
     
 private:
+    bool isOnEmptyPosition(const SnakePiece&) const;
+    bool isOnFood(const SnakePiece&) const;
+    bool isOnCollision(const SnakePiece&) const;
+
+private:
+    void removeTail();
     void eatFood();
     void removeFood();
     void increaseScore();
     bool foodExists() const;
-
-private:
-    bool isOnFood(SnakePiece) const;
-    bool isOnCollision(SnakePiece) const;
-    bool isOnEmptyPosition(SnakePiece) const;
-    void removeTail();
 
 private:
     const WindowPtr window_;
@@ -54,7 +52,6 @@ private:
     Snake snake_;
     FoodPtr food_;
     int score_;
-    // int speed_;
 };
 
 #endif // GAME_HPP

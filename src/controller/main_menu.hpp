@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "menu.hpp"
+#include "options.hpp"
 
 using Sections = std::vector<std::string>;
 
@@ -16,8 +16,6 @@ public:
     void processInput();
     void run();
 
-private:
-    bool exit_;
 };
 
 #endif // MAIN_MENU_HPP

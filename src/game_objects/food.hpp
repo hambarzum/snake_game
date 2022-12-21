@@ -5,7 +5,7 @@
 
 class Food : public Cell {
 public:
-    Food(Position pos);
+    Food(const Position& pos);
     
 };
 

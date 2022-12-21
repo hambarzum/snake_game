@@ -6,7 +6,7 @@ Cell::Cell() {
     icon_ = ' ';
 }
 
-Cell::Cell(Position pos, char character) {
+Cell::Cell(const Position& pos, char character) {
     pos_ = pos;
     icon_ = character;
 }

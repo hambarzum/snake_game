@@ -14,7 +14,7 @@ enum Direction {
 
 class SnakePiece : public Cell {
 public:
-    SnakePiece(Position);
+    SnakePiece(const Position&);
 
 };
 
@@ -25,17 +25,17 @@ public:
     Snake();
 
 public:
-    void addPiece(SnakePiece);
+    void addPiece(const SnakePiece&);
     void removePiece();
-    SnakePiece head();
-    SnakePiece tail();
+    SnakePiece head() const;
+    SnakePiece tail() const;
     Direction getDirection() const;
-    void setDirection(Direction);
-    SnakePiece createNewPiece();
+    void setDirection(const Direction&);
+    SnakePiece createNewPiece() const;
 
 private:
-    Position locateNewPiecePosition();
-    bool legalDirection(Direction);
+    Position locateNewPiecePosition() const;
+    bool legalDirection(const Direction&) const;
 
 private:
     SnakePieces snake_;

@@ -5,7 +5,7 @@
 
 class Empty : public Cell{
 public:
-    Empty(Position pos);
+    Empty(const Position& pos);
     
 };
 

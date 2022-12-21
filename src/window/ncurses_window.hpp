@@ -6,17 +6,19 @@
 
 class NCursesWindow : public Window{
 public:
-    NCursesWindow(const Size);
+    NCursesWindow(const Size&);
     ~NCursesWindow();
 
 public:
     void drawGame() const;
-    void drawMenu(const Sections&, int choice);
+    void drawMenu(const Sections&, int choice) const;
     void drawCell(const Cell&) const;
+    void drawScoreBoard(int score) const;
+    void drawOptions() const;
 
 public:
     char getInput() const;
-    char getCharacterAt(Position) const;
+    char getCharacterAt(const Position&) const;
     Size getSize() const;
     
 public:    
@@ -25,9 +27,12 @@ public:
     
 private:
     Size getMaxScreenSize() const;
-    Position getCenterPosition(Size) const;
+    Position getCenterPosition(const Size&) const;
     void drawWindowBorders() const;
-    void drawScoreBoard(int score) const;
+    void drawMenuHeader() const;
+    void drawMenuSections(const Sections&, int choice) const;
+    void drawOptionsHeader() const;
+    void drawOptionsContent() const;
 
 private:
     WINDOW* window_;

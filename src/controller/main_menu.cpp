@@ -1,5 +1,6 @@
 #include "main_menu.hpp"
 #include "play.hpp"
+#include "options.hpp"
 
 MainMenu::MainMenu(const WindowPtr win) 
     : Menu(win)
@@ -13,7 +14,6 @@ void MainMenu::processInput() {
     chtype input = window_->getInput();
 
     switch(input) {
-        case KEY_UP: // implement
         case 'w':
             if(choice_ > 0) {
                 choice_--;
@@ -22,7 +22,6 @@ void MainMenu::processInput() {
                 choice_ = sections_.size() - 1;
             }
             break;
-        case KEY_DOWN: // implement
         case 's':
             if(choice_ < sections_.size() - 1) {
                 choice_++;
@@ -37,6 +36,16 @@ void MainMenu::processInput() {
                 Game game(window_);
                 game.run();
             }
+
+            if(sections_[choice_] == "Options") {
+                Options options(window_);
+                options.run();
+            }
+
+            if(sections_[choice_] == "Records") {
+            
+            }
+
 
             else if(sections_[choice_] == "Quit") {
                 exit_ = true;

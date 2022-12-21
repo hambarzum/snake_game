@@ -20,6 +20,7 @@ protected:
     int choice_;
     Sections sections_; 
     const WindowPtr window_;
+    bool exit_;
 };
 
 #endif // MENU_HPP

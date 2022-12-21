@@ -1,19 +1,21 @@
 #include "ncurses_window.hpp"
 
-NCursesWindow::NCursesWindow(const Size size) 
+NCursesWindow::NCursesWindow(const Size& size) 
     : size_(size)
 {
     initscr();
     noecho();
     curs_set(0);
-    raw(); // prevents from exiting out by ctrl+C
+    raw(); // prevents from exiting out by ctrl+C/ctrl+Z
 
     pos_ = getCenterPosition(getMaxScreenSize());
     window_ = newwin(size.height, size.width, pos_.row, pos_.column);
 
-    keypad(window_, true);
-    
-    wtimeout(window_, 200);
+    wtimeout(window_, 150);
+}
+
+NCursesWindow::~NCursesWindow() {
+    endwin();
 }
 
 void NCursesWindow::drawGame() const {
@@ -29,34 +31,38 @@ Size NCursesWindow::getMaxScreenSize() const {
     return maxSize;
 }
 
-Position NCursesWindow::getCenterPosition(Size maxSize) const {
+Position NCursesWindow::getCenterPosition(const Size& maxSize) const {
     return Position {(maxSize.height/2) - (size_.height/2), (maxSize.width/2) - (size_.width/2)};
 }
 
-void NCursesWindow::drawMenu(const Sections& sections, int choice) {
+void NCursesWindow::drawMenu(const Sections& sections, int choice) const {
     clean();
     drawWindowBorders();
-    
-    const Position menuPos = {size_.height / 2 - int(sections.size()) / 2, size_.width / 2 - 5}; // places menu in window's approximate center
 
-    for (int i = 0; i < sections.size(); ++i) {
-        if (choice == i) {
-            mvwprintw(window_, menuPos.row + i, menuPos.column, "->%s", sections[i].c_str());
-        }
-        else {
-            mvwprintw(window_, menuPos.row + i, menuPos.column, "  %s", sections[i].c_str());
-        }
-    }
+    drawMenuHeader();
+    drawMenuSections(sections, choice);
 
     this->refresh();
 }
 
-void NCursesWindow::drawWindowBorders() const {
-    box(window_, 0, 0);
+void NCursesWindow::drawMenuHeader() const {
+    mvwprintw(window_, size_.height/2 - 6, size_.width / 2 - 2, "MENU");
 }
 
-NCursesWindow::~NCursesWindow() {
-    endwin();
+void NCursesWindow::drawMenuSections(const Sections& sections, int choice) const {
+    const Position menuPos = {size_.height / 2 - int(sections.size()) / 2, size_.width / 2 - 3}; // places menu in window's approximate center
+
+    for (int i = 0; i < sections.size(); ++i) {
+        if (choice == i) {
+            wattron(window_, A_REVERSE); // highlights choice
+        }
+        mvwprintw(window_, menuPos.row + i, menuPos.column, "%s", sections[i].c_str());
+        wattroff(window_, A_REVERSE);
+    }
+}
+
+void NCursesWindow::drawWindowBorders() const {
+    box(window_, 0, 0);
 }
 
 void NCursesWindow::drawCell(const Cell& object) const {
@@ -68,11 +74,31 @@ void NCursesWindow::drawScoreBoard(int score) const {
     wprintw(window_, "%d", score);
 }
 
+void NCursesWindow::drawOptions() const {
+    clean();
+    drawWindowBorders();
+    
+    drawOptionsHeader();
+    drawOptionsContent();
+
+}
+
+void NCursesWindow::drawOptionsHeader() const {
+    mvwprintw(window_, size_.height / 2 - 6, size_.width / 2 - 3, "OPTIONS");
+}
+
+void NCursesWindow::drawOptionsContent() const {
+    mvwprintw(window_, size_.height / 2 - 2, 3, "Esc: Back To Last Window");
+    mvwprintw(window_, size_.height / 2 - 1, 3, "Enter: Select Option");
+    mvwprintw(window_, size_.height / 2, 3, "W/S: Move Up/Down");
+    mvwprintw(window_, size_.height / 2 + 1, 3, "A/D: Move Left/Right");
+}
+
 char NCursesWindow::getInput() const {
     return wgetch(window_);
 }
 
-char NCursesWindow::getCharacterAt(Position pos) const {
+char NCursesWindow::getCharacterAt(const Position& pos) const {
     return mvwinch(window_, pos.column, pos.row);
 }
 
