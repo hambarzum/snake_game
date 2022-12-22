@@ -12,7 +12,7 @@ Options::Options(WindowPtr win)
 }
 
 void Options::processInput() {
-    chtype input = window_->getInput();
+    const char input = window_->getInput();
 
     switch(input) {
         case 27: // Esc ASCII code

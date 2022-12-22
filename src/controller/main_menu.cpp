@@ -16,7 +16,7 @@ MainMenu::MainMenu(const WindowPtr win)
 }
 
 void MainMenu::processInput() {
-    chtype input = window_->getInput();
+    const char input = window_->getInput();
 
     switch(input) {
         case 'w':

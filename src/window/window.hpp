@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <ncurses.h>
 
 #include "../game_objects/cell.hpp"
 

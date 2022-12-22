@@ -12,7 +12,7 @@ public:
     void run();
 
 private:
-    WindowPtr window_; // const??
+    const WindowPtr window_;
     OptionsContent content_;
     bool exit_;
 };
