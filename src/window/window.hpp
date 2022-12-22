@@ -12,7 +12,7 @@ struct Size {
     int width;
 };
 
-using Sections = std::vector<std::string>;
+using MenuTabs = std::vector<std::string>;
 
 class Window {
 public:
@@ -21,7 +21,7 @@ public:
 
 public:
     virtual void drawGame() const = 0;
-    virtual void drawMenu(const Sections&, int choice) const = 0;
+    virtual void drawMenu(const MenuTabs&, int choice) const = 0;
     virtual void drawCell(const Cell&) const = 0;
     virtual void drawScoreBoard(int score) const = 0;
     virtual void drawOptions() const = 0;

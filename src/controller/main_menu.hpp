@@ -6,8 +6,6 @@
 
 #include "options.hpp"
 
-using Sections = std::vector<std::string>;
-
 class MainMenu : public Menu {
 public:
     MainMenu(const WindowPtr win);

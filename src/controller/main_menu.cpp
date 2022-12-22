@@ -6,7 +6,7 @@ MainMenu::MainMenu(const WindowPtr win)
     : Menu(win)
 {
     choice_ = 0;
-    sections_ = {"Play", "Options", "Records", "Quit"};
+    tabs = {"Play", "Options", "Records", "Quit"};
     exit_ = false;
 }
 
@@ -19,11 +19,11 @@ void MainMenu::processInput() {
                 choice_--;
             }
             else {
-                choice_ = sections_.size() - 1;
+                choice_ = tabs.size() - 1;
             }
             break;
         case 's':
-            if(choice_ < sections_.size() - 1) {
+            if(choice_ < tabs.size() - 1) {
                 choice_++;
             }
             else {
@@ -31,23 +31,23 @@ void MainMenu::processInput() {
             }
             break;
         case 10: // Enter ASCII code
-            if (sections_[choice_] == "Play") {
+            if (tabs[choice_] == "Play") {
                 window_->drawGame();
                 Game game(window_);
                 game.run();
             }
 
-            if(sections_[choice_] == "Options") {
+            if(tabs[choice_] == "Options") {
                 Options options(window_);
                 options.run();
             }
 
-            if(sections_[choice_] == "Records") {
+            if(tabs[choice_] == "Records") {
             
             }
 
 
-            else if(sections_[choice_] == "Quit") {
+            else if(tabs[choice_] == "Quit") {
                 exit_ = true;
                 window_->clean();
                 window_->refresh();
@@ -60,7 +60,7 @@ void MainMenu::processInput() {
 
 void MainMenu::run() {
     while(!exit_) {
-        window_->drawMenu(sections_, choice_);
+        window_->drawMenu(tabs, choice_);
         processInput();
     }
 }

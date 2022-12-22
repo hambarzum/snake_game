@@ -35,12 +35,12 @@ Position NCursesWindow::getCenterPosition(const Size& maxSize) const {
     return Position {(maxSize.height/2) - (size_.height/2), (maxSize.width/2) - (size_.width/2)};
 }
 
-void NCursesWindow::drawMenu(const Sections& sections, int choice) const {
+void NCursesWindow::drawMenu(const MenuTabs& tabs, int choice) const {
     clean();
     drawWindowBorders();
 
     drawMenuHeader();
-    drawMenuSections(sections, choice);
+    drawMenuTabs(tabs, choice);
 
     this->refresh();
 }
@@ -49,14 +49,14 @@ void NCursesWindow::drawMenuHeader() const {
     mvwprintw(window_, size_.height/2 - 6, size_.width / 2 - 2, "MENU");
 }
 
-void NCursesWindow::drawMenuSections(const Sections& sections, int choice) const {
-    const Position menuPos = {size_.height / 2 - int(sections.size()) / 2, size_.width / 2 - 3}; // places menu in window's approximate center
+void NCursesWindow::drawMenuTabs(const MenuTabs& tabs, int choice) const {
+    const Position menuPos = {size_.height / 2 - int(tabs.size()) / 2, size_.width / 2 - 3}; // places menu in window's approximate center
 
-    for (int i = 0; i < sections.size(); ++i) {
+    for (int i = 0; i < tabs.size(); ++i) {
         if (choice == i) {
             wattron(window_, A_REVERSE); // highlights choice
         }
-        mvwprintw(window_, menuPos.row + i, menuPos.column, "%s", sections[i].c_str());
+        mvwprintw(window_, menuPos.row + i, menuPos.column, "%s", tabs[i].c_str());
         wattroff(window_, A_REVERSE);
     }
 }

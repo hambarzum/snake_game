@@ -18,7 +18,7 @@ public:
 
 protected:
     int choice_;
-    Sections sections_; 
+    MenuTabs tabs; 
     const WindowPtr window_;
     bool exit_;
 };

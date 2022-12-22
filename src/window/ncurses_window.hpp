@@ -11,7 +11,7 @@ public:
 
 public:
     void drawGame() const;
-    void drawMenu(const Sections&, int choice) const;
+    void drawMenu(const MenuTabs&, int choice) const;
     void drawCell(const Cell&) const;
     void drawScoreBoard(int score) const;
     void drawOptions() const;
@@ -30,7 +30,7 @@ private:
     Position getCenterPosition(const Size&) const;
     void drawWindowBorders() const;
     void drawMenuHeader() const;
-    void drawMenuSections(const Sections&, int choice) const;
+    void drawMenuTabs(const MenuTabs&, int choice) const;
     void drawOptionsHeader() const;
     void drawOptionsContent() const;
 
