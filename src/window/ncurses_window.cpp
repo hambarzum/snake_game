@@ -74,12 +74,12 @@ void NCursesWindow::drawScoreBoard(int score) const {
     wprintw(window_, "%d", score);
 }
 
-void NCursesWindow::drawOptions() const {
+void NCursesWindow::drawOptions(const OptionsContent& content) const {
     clean();
     drawWindowBorders();
     
     drawOptionsHeader();
-    drawOptionsContent();
+    drawOptionsContent(content);
 
 }
 
@@ -87,11 +87,10 @@ void NCursesWindow::drawOptionsHeader() const {
     mvwprintw(window_, size_.height / 2 - 6, size_.width / 2 - 3, "OPTIONS");
 }
 
-void NCursesWindow::drawOptionsContent() const {
-    mvwprintw(window_, size_.height / 2 - 2, 3, "Esc: Back To Last Window");
-    mvwprintw(window_, size_.height / 2 - 1, 3, "Enter: Select Option");
-    mvwprintw(window_, size_.height / 2, 3, "W/S: Move Up/Down");
-    mvwprintw(window_, size_.height / 2 + 1, 3, "A/D: Move Left/Right");
+void NCursesWindow::drawOptionsContent(const OptionsContent& content) const {
+    for(int i = 0; i < content.size(); ++i) {
+        mvwprintw(window_, size_.height / 2 - 2 + i, 3, "%s", content[i].c_str());
+    } 
 }
 
 char NCursesWindow::getInput() const {

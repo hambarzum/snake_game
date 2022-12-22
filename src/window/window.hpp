@@ -13,6 +13,7 @@ struct Size {
 };
 
 using MenuTabs = std::vector<std::string>;
+using OptionsContent = std::vector<std::string>;
 
 class Window {
 public:
@@ -24,7 +25,7 @@ public:
     virtual void drawMenu(const MenuTabs&, int choice) const = 0;
     virtual void drawCell(const Cell&) const = 0;
     virtual void drawScoreBoard(int score) const = 0;
-    virtual void drawOptions() const = 0;
+    virtual void drawOptions(const OptionsContent&) const = 0;
 
 public:
     virtual char getInput() const = 0;

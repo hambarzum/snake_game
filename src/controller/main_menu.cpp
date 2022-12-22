@@ -6,7 +6,12 @@ MainMenu::MainMenu(const WindowPtr win)
     : Menu(win)
 {
     choice_ = 0;
-    tabs = {"Play", "Options", "Records", "Quit"};
+    tabs = {
+        "Play", 
+        "Options", 
+        "Records", 
+        "Quit"
+    };
     exit_ = false;
 }
 

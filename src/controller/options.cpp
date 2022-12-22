@@ -2,7 +2,14 @@
 
 Options::Options(WindowPtr win) 
     : window_(win), exit_(false)
-{}
+{
+    content_ = {
+        "Esc: Back To Last Window",
+        "Enter: Select Option",
+        "W/S: Move Up/Down",
+        "A/D: Move Left/Right"
+    };
+}
 
 void Options::processInput() {
     chtype input = window_->getInput();
@@ -18,7 +25,7 @@ void Options::processInput() {
 
 void Options::run() {
     while(!exit_) {
-        window_->drawOptions();
+        window_->drawOptions(content_);
         processInput();
     }
 }

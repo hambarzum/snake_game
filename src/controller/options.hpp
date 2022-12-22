@@ -3,7 +3,6 @@
 
 #include "menu.hpp"
 
-
 class Options {
 public:
     Options(const WindowPtr);
@@ -13,7 +12,8 @@ public:
     void run();
 
 private:
-    WindowPtr window_;
+    WindowPtr window_; // const??
+    OptionsContent content_;
     bool exit_;
 };
 

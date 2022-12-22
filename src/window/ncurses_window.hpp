@@ -14,7 +14,7 @@ public:
     void drawMenu(const MenuTabs&, int choice) const;
     void drawCell(const Cell&) const;
     void drawScoreBoard(int score) const;
-    void drawOptions() const;
+    void drawOptions(const OptionsContent&) const;
 
 public:
     char getInput() const;
@@ -32,7 +32,7 @@ private:
     void drawMenuHeader() const;
     void drawMenuTabs(const MenuTabs&, int choice) const;
     void drawOptionsHeader() const;
-    void drawOptionsContent() const;
+    void drawOptionsContent(const OptionsContent&) const;
 
 private:
     WINDOW* window_;
