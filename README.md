@@ -5,7 +5,6 @@
 This repository is the course project of making a console version of the snake game.
 
 The main project containing all the files needed to run the game are placed in **project**.
-**Presentation** is a brief summary for the course project in .pdf format. 
 
 ## About snake game
 
