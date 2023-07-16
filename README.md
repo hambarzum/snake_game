@@ -4,7 +4,7 @@
 
 This repository is the course project of making a console version of the snake game.
 
-The main project containing all the files needed to run the game are placed in **project**.
+The main project containing all the files needed to run the game are placed in **src**.
 
 ## About snake game
 
@@ -33,7 +33,3 @@ In **project**:
 * Run - **make run**
 * Remove output file - **make clean**
 * In order to run all the commands mentioned above - **make**
-
-## FYI
-
-The project is not yet finished and expects future updates by the creator including new features, improved UI and more.
